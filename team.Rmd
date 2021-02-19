@@ -1,0 +1,72 @@
+---
+title: "ds202_lab2"
+author: "John Barmen"
+date: "2/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setups}
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
+str(choco)
+```
+
+1)
+```{r 1}
+hist(choco$Rating)
+boxplot(choco$Rating)
+```
+The ratings are skewed left with the magority being grouped around 2.75-3.5, There are several outliers in the range of 1 to 2.  
+
+2)
+```{r 2}
+count <- table(choco$Rating, choco$Location)
+par(mar=c(15,5,1,1))
+barplot(count, las=2)
+count
+```
+Some countries, like the USA, dominate the number of reviews. This could be for many reasons but more than a third of the reviews are from one country.  
+
+3)
+```{r 3}
+model = lm(Rating~Cocoa_Percent, data=choco)
+summary(model)
+plot(choco$Rating, choco$Cocoa_Percent)
+boxplot(choco$Rating~choco$Cocoa_Percent)
+```
+The cocoa percent seems to have little effect on the rating of the chocolate, the p value of the least squares for cocoa percent is nearly 0 indicating little to no impact on the rating. The scatter plot confirms this in that there is a spread of percents at each rating. Lastly the Box plots show that each percentage has a spread of ratings similar to that of the entire ratings regardless of cocoa percent.
+
+
+4)
+```{r 4}
+count2 <- table(choco$Rating, choco$Bean_Origin)
+par(mar=c(15,5,1,1))
+barplot(count2, las=2)
+count2
+highrate <- subset(choco, Rating>="3.5")
+count3 <- table(highrate$Rating, highrate$Bean_Origin)
+par(mar=c(15,5,1,1))
+barplot(count3, las=2)
+count3
+```
+After thining the data it becomes clear that some countries are able to produce better beans than others, after filtering by all down to only reviews of 3.5 or higher many countries where dropped and some where able to retain many of their reviews. Countries like ecuador and Venzuela are good examples of countries that produce excellent cocoa beans.
+5)
+```{r 5}
+hist(choco$Cocoa_Percent)
+boxplot(choco$Cocoa_Percent)
+```
+This chart shows the distribution of cocoa percents in various chocolates, the vast majority contain 65-75% cocoa, with outliers above 82~% range and below 62~% range.
+```{r 5b}
+count4 <- table(choco$Rating, choco$Ingredients)
+par(mar=c(15,5,1,1))
+barplot(count4, las=2)
+count4
+count5 <- table(highrate$Rating, highrate$Ingredients)
+par(mar=c(15,5,1,1))
+barplot(count5, las=2)
+count5
+```
+This data was to try to see is ingredients had a role in how the chocolate would be scored, despite being filtered by score, the distribution of scores stayed very similar to the unfiltered layout, this leads me to conclude that ingredients play little role in the final rating of the chocolate, as long as they are standard ingredients.

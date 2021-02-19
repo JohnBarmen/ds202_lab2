@@ -1,0 +1,20 @@
+---
+title: "scratch"
+author: "John Barmen"
+date: "2/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1) the distribution seems skewed to the left  
+
+2) seems like countries that would have the most chocolate processing/production get the most ratings  
+
+3) I think that there will be a preference in 70% since that is what most companies are making  
+
+4) I an sure that some places of origin will just have superior cocoa beans as many things factor into a good bean, and some countries are just more suited than others.
+
+5) id like to see the distributions of cocoa percentages, and to see how ingredients play a role in ratings
